@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Pio Magliarella - Full Stack Developer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,1000 1000,300 1000,1000"/><polygon fill="rgba(255,255,255,0.03)" points="0,800 1000,100 1000,800"/></svg>');
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 30px;
+            padding: 3rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffd89b, #19547b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin: 0 auto 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        /* About Section */
+        .about {
+            padding: 6rem 0;
+            background: #f8fafc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            color: #1a202c;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .skill-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-item h4 {
+            color: #1a202c;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .project-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-body {
+            padding: 2rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .tech-tag {
+            background: #edf2f7;
+            color: #4a5568;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info {
+            space-y: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Alex Pio Magliarella</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">Chi Sono</a></li>
+                <li><a href="#projects">Progetti</a></li>
+                <li><a href="#contact">Contatti</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Developer</h1>
+                <p class="hero-subtitle">IT for Management Student</p>
+                <p class="hero-description">
+                    Sviluppo soluzioni software innovative con focus su  
+                    architetture moderne e tecnologie cloud-native. 
+                    Passione per il problem-solving e l'automazione di processi aziendali.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">
+                        <i class="fas fa-laptop-code"></i>
+                        I Miei Progetti
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="fas fa-envelope"></i>
+                        Contattami
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="profile-card">
+                    <div class="profile-avatar" style="padding: 0; overflow: hidden; background: none;">
+                        <img src="profile.jpg" alt="Alex Pio Magliarella" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                    </div>
+                    <h3>Alex Pio Magliarella</h3>
+                    <p style="opacity: 0.8; margin-top: 0.5rem;">Università di Bologna</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Chi Sono</h2>
+            <div class="about-grid">
+                <div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: #1a202c;">
+                        🎓 Sviluppatore & AI Enthusiast
+                    </h3>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: #4a5568; margin-bottom: 2rem;">
+                        Studente di IT for Management Science all'Università di Bologna. Mi definisco un 
+                        <strong>"AI Developer"</strong>: utilizzo l'intelligenza artificiale come moltiplicatore 
+                        di produttività per trasformare idee in software funzionanti.L’AI è la mano, io sono la mente che la guida.
+                    </p>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: #4a5568;">
+                        Il mio approccio si concentra sull'architettura del software, sul problem-solving 
+                        e sull'integrazione di tecnologie moderne, curando l'orchestrazione 
+                        tra Frontend, Backend e Cloud. Non voglio pormi limiti, sono pronto a sviluppare qualsiasi progetto e mettermi in gioco.
+                    </p>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="skill-icon" style="color: #3776ab;">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <h4>Python & AI</h4>
+                        <p>Integrazione LLM, Pandas, Automazione</p>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon" style="color: #f7df1e;">
+                            <i class="fab fa-js"></i>
+                        </div>
+                        <h4>Web Tech</h4>
+                        <p>Modern Frameworks & Rapid Prototyping</p>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon" style="color: #8b5cf6;">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h4>AI Workflow</h4>
+                        <p>Prompt Engineering, Code Reviewing</p>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon" style="color: #28a745;">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <h4>Architecture</h4>
+                        <p>System Design & Data Flow</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">I Miei Progetti</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">🍽️</div>
+                        <h3>Neri Catering System</h3>
+                        <p>Sistema completo gestione ordini catering</p>
+                    </div>
+                    <div class="project-body">
+                        <p>Sistema enterprise per la gestione completa di ordini catering con architettura cloud-native, interfacce desktop e web, sincronizzazione real-time e export automatizzato.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">PyQt6</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <a href="javascript:void(0)" onclick="goToNeriProject()" class="btn btn-primary" style="margin-top: 1rem;">
+                            <i class="fas fa-eye"></i>
+                            Vedi Dettagli
+                        </a>
+                    </div>
+                </div>
+                
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">📊</div>
+                        <h3>Progetti Futuri</h3>
+                        <p>Prossimi sviluppi in corso</p>
+                    </div>
+                    <div class="project-body">
+                        <p>Sempre alla ricerca di nuove sfide e progetti interessanti. Attualmente sto studiando React, Node.js e tecnologie moderne per espandere il portfolio.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">AWS</span>
+                        </div>
+                        <a href="#contact" class="btn btn-primary" style="margin-top: 1rem;">
+                            <i class="fas fa-handshake"></i>
+                            Collaboriamo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Contattami</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 2rem;">Parliamo del tuo progetto</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 3rem; opacity: 0.9;">
+                        Sono sempre interessato a nuove opportunità e progetti stimolanti. 
+                        Che si tratti di sviluppo software, consulenza tecnica o collaborazioni, 
+                        non esitare a contattarmi.
+                    </p>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>alexp.magliarella@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div>
+                            <h4>Università</h4>
+                            <p>Alma Mater Studiorum - Università di Bologna</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Località</h4>
+                            <p>Bologna, Italia</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 2rem;">Social Links</h3>
+                    <p style="margin-bottom: 2rem; opacity: 0.9;">
+                        Seguimi sui social per rimanere aggiornato sui miei progetti e articoli tecnici.
+                    </p>
+                    
+                    <div class="social-links">
+                        <a href="mailto:alexp.magliarella@gmail.com" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://twitter.com/alexpiomagliarella" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                    
+                    <div style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 15px;">
+                        <h4 style="margin-bottom: 1rem;">💼 Disponibilità</h4>
+                        <p style="opacity: 0.9;">
+                            Attualmente disponibile per progetti freelance, stage e opportunità di collaborazione. 
+                            Particolarmente interessato a ruoli in ambito Full-Stack Development.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section, .project-card, .skill-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navigation to Neri Gestione Project
+        function goToNeriGestioneProject() {
+            // Hide all sections
+            document.querySelectorAll('section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Hide navbar
+            document.querySelector('.navbar').style.display = 'none';
+            
+            // Create and show Neri Gestione project page
+            const neriGestionePage = document.createElement('div');
+            neriGestionePage.id = 'neri-gestione-page';
+            neriGestionePage.innerHTML = getNeriGestioneProjectPage();
+            document.body.appendChild(neriGestionePage);
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function backToPortfolioFromGestione() {
+            // Remove Neri Gestione project page
+            const neriGestionePage = document.getElementById('neri-gestione-page');
+            if (neriGestionePage) {
+                neriGestionePage.remove();
+            }
+            
+            // Show all sections
+            document.querySelectorAll('section').forEach(section => {
+                section.style.display = 'block';
+            });
+            
+            // Show navbar
+            document.querySelector('.navbar').style.display = 'block';
+            
+            // Scroll to projects section
+            document.getElementById('projects').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Get Neri Gestione Project Page Content
+        function getNeriGestioneProjectPage() {
+            return `
+                <div style="min-height: 100vh; background: white;">
+                    <!-- Header with back button -->
+                    <div style="position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); z-index: 1000; padding: 1rem 0; box-shadow: 0 2px 20px rgba(0,0,0,0.1);">
+                        <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; padding: 0 2rem;">
+                            <button onclick="backToPortfolioFromGestione()" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-arrow-left"></i>
+                                Torna al Portfolio
+                            </button>
+                            <h1 style="margin-left: 2rem; color: #1a202c; font-size: 1.5rem; font-weight: 700;">📊 Neri Gestione Catering - Portfolio Project</h1>
+                        </div>
+                    </div>
+
+                    <!-- Main content -->
+                    <div style="padding-top: 6rem;">
+                        <!-- Hero Section -->
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 4rem 2rem; text-align: center;">
+                            <div style="max-width: 1200px; margin: 0 auto;">
+                                <h1 style="font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; background: linear-gradient(45deg, #ffd89b, #19547b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 8px rgba(0,0,0,0.3);">📊 Neri Gestione Catering</h1>
+                                <p style="font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.9;">Portfolio Project - Showcase completo del sistema enterprise</p>
+                                
+                                <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem;">
+                                    <span style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); padding: 0.5rem 1rem; border-radius: 25px; font-weight: 600; backdrop-filter: blur(10px);">Portfolio</span>
+                                    <span style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); padding: 0.5rem 1rem; border-radius: 25px; font-weight: 600; backdrop-filter: blur(10px);">Case Study</span>
+                                    <span style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); padding: 0.5rem 1rem; border-radius: 25px; font-weight: 600; backdrop-filter: blur(10px);">Full-Stack</span>
+                                    <span style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); padding: 0.5rem 1rem; border-radius: 25px; font-weight: 600; backdrop-filter: blur(10px);">Enterprise</span>
+                                    <span style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); padding: 0.5rem 1rem; border-radius: 25px; font-weight: 600; backdrop-filter: blur(10px);">Real-World</span>
+                                </div>
+
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+                                    <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 15px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                                        <div style="font-size: 2rem; font-weight: 800; color: #ffd89b; margin-bottom: 0.5rem;">Enterprise</div>
+                                        <div style="color: white; opacity: 0.9; font-weight: 600;">Sistema Aziendale</div>
+                                    </div>
+                                    <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 15px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                                        <div style="font-size: 2rem; font-weight: 800; color: #ffd89b; margin-bottom: 0.5rem;">Full-Stack</div>
+                                        <div style="color: white; opacity: 0.9; font-weight: 600;">End-to-End</div>
+                                    </div>
+                                    <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 15px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                                        <div style="font-size: 2rem; font-weight: 800; color: #ffd89b; margin-bottom: 0.5rem;">Portfolio</div>
+                                        <div style="color: white; opacity: 0.9; font-weight: 600;">Case Study</div>
+                                    </div>
+                                    <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 15px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                                        <div style="font-size: 2rem; font-weight: 800; color: #ffd89b; margin-bottom: 0.5rem;">Production</div>
+                                        <div style="color: white; opacity: 0.9; font-weight: 600;">Ready System</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Overview -->
+                        <div style="max-width: 1200px; margin: 0 auto; padding: 4rem 2rem;">
+                            
+                            <!-- Project Description -->
+                            <div style="background: white; border-radius: 20px; padding: 3rem; margin-bottom: 3rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1); text-align: center;">
+                                <h2 style="color: #1a202c; margin-bottom: 2rem; font-size: 2.5rem;">💼 Progetto Portfolio</h2>
+                                <p style="font-size: 1.2rem; color: #4a5568; max-width: 800px; margin: 0 auto 2rem; line-height: 1.8;">
+                                    <strong>Neri Gestione Catering</strong> è un sistema completo sviluppato end-to-end per la gestione aziendale di ordini catering. 
+                                    Questo progetto dimostra competenze full-stack attraverso l'implementazione di architetture moderne, 
+                                    interfacce intuitive e soluzioni cloud-native in un contesto enterprise reale.
+                                </p>
+                                <div style="background: #f8fafc; padding: 2rem; border-radius: 15px; margin: 2rem 0;">
+                                    <h3 style="color: #1a202c; margin-bottom: 1rem;">🎯 Obiettivi del Progetto</h3>
+                                    <p style="color: #4a5568; line-height: 1.6;">
+                                        Automatizzare completamente il processo di gestione ordini catering, dal input iniziale alla generazione 
+                                        di report finali, integrando tecnologie moderne e garantendo scalabilità e manutenibilità del sistema.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Technical Architecture -->
+                            <div style="background: white; border-radius: 20px; padding: 3rem; margin-bottom: 3rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+                                <h2 style="text-align: center; margin-bottom: 3rem; color: #1a202c;">🏗️ Stack Tecnologico</h2>
+                                
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                                    <div style="background: #f8fafc; padding: 2rem; border-radius: 15px; text-align: center;">
+                                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #3776ab, #ffd343); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+                                            <i class="fab fa-python" style="font-size: 1.5rem; color: white;"></i>
+                                        </div>
+                                        <h4 style="color: #1a202c; margin-bottom: 1rem;">Backend Development</h4>
+                                        <p style="color: #4a5568; line-height: 1.6; margin-bottom: 1rem;">Python con PyQt6 per interfacce desktop moderne e Flask per API REST robuste</p>
+                                        <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;">
+                                            <span style="background: #edf2f7; color: #4a5568; padding: 0.2rem 0.5rem; border-radius: 10px; font-size: 0.8rem;">PyQt6</span>
+                                            <span style="background: #edf2f7; color: #4a5568; padding: 0.2rem 0.5rem; border-radius: 10px; font-size: 0.8rem;">Flask</span>
+                                            <span style="background: #edf2f7; color: #4a5568; padding: 0.2rem 0.5rem; border-radius: 10px; font-size: 0.8rem;">APIs</span>
+                                        </div>
+                                    </div>
+
+                                    <div style="background: #f8fafc; padding: 2rem; border-radius: 15px; text-align: center;">
+                                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #f7df1e, #000000); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+                                            <i class="fab fa-js" style="font-size: 1.5rem; color: white;"></i>
+                                        </div>
+                                        <h4 style="color: #1a202c; margin-bottom: 1rem;">Frontend Development</h4>
+                                        <p style="color: #4a5568; line-height: 1.6; margin-bottom: 1rem;">JavaScript moderno per interfacce web responsive con aggiornamenti real-time</p>
+                                        <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;">
+                                            <span style="background: #edf2f7; color: #4a5568; padding: 0.2rem 0.5rem; border-radius: 10px; font-size: 0.8rem;">ES6+</span>
+                                            <span style="background: #edf2f7; color: #4a5568; padding: 0.2rem 0.5rem; border-radius: 10px; font-size: 0.8rem;">DOM</span>
+                                            <span style="background: #edf2f7; color: #4a5568; padding: 0.2rem 0.5rem; border-radius: 10px; font-size: 0.8rem;">Real-time</span>
+                                        </div>
+                                    </div>
+
+                                    <div style="background: #f8fafc; padding: 2rem; border-radius: 15px; text-align: center;">
+                                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #ff6b35, #f7931e); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+                                            <i class="fas fa-cloud" style="font-size: 1.5rem; color: white;"></i>
+                                        </div>
+                                        <h4 style="color: #1a202c; margin-bottom: 1rem;">Cloud Infrastructure</h4>
+                                        <p style="color: #4a5568; line-height: 1.6; margin-bottom: 1rem;">Firebase per persistenza cloud e sincronizzazione multi-dispositivo</p>
+                                        <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;">
+                                            <span style="background: #edf2f7; color: #4a5568; padding: 0.2rem 0.5rem; border-radius: 10px; font-size: 0.8rem;">Firebase</span>
+                                            <span style="background: #edf2f7; color: #4a5568; padding: 0.2rem 0.5rem; border-radius: 10px; font-size: 0.8rem;">REST APIs</span>
+                                            <span style="background: #edf2f7; color: #4a5568; padding: 0.2rem 0.5rem; border-radius: 10px; font-size: 0.8rem;">NoSQL</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Key Features -->
+                            <div style="background: white; border-radius: 20px; padding: 3rem; margin-bottom: 3rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+                                <h2 style="text-align: center; margin-bottom: 3rem; color: #1a202c;">⭐ Caratteristiche Principali</h2>
+                                
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                                    <div style="text-align: center; padding: 2rem; background: #f8fafc; border-radius: 15px; border-left: 4px solid #10b981;">
+                                        <i class="fas fa-cogs" style="font-size: 2rem; color: #10b981; margin-bottom: 1rem;"></i>
+                                        <h4 style="color: #1a202c; margin-bottom: 1rem;">Automazione Completa</h4>
+                                        <p style="color: #4a5568; line-height: 1.6;">Calcoli automatici, validazione dati e generazione report senza intervento manuale</p>
+                                    </div>
+
+                                    <div style="text-align: center; padding: 2rem; background: #f8fafc; border-radius: 15px; border-left: 4px solid #8b5cf6;">
+                                        <i class="fas fa-users" style="font-size: 2rem; color: #8b5cf6; margin-bottom: 1rem;"></i>
+                                        <h4 style="color: #1a202c; margin-bottom: 1rem;">Multi-User System</h4>
+                                        <p style="color: #4a5568; line-height: 1.6;">Gestione simultanea di più utenti con sincronizzazione real-time</p>
+                                    </div>
+
+                                    <div style="text-align: center; padding: 2rem; background: #f8fafc; border-radius: 15px; border-left: 4px solid #06b6d4;">
+                                        <i class="fas fa-chart-line" style="font-size: 2rem; color: #06b6d4; margin-bottom: 1rem;"></i>
+                                        <h4 style="color: #1a202c; margin-bottom: 1rem;">Business Intelligence</h4>
+                                        <p style="color: #4a5568; line-height: 1.6;">Analytics avanzate e reportistica per decision making</p>
+                                    </div>
+
+                                    <div style="text-align: center; padding: 2rem; background: #f8fafc; border-radius: 15px; border-left: 4px solid #f59e0b;">
+                                        <i class="fas fa-shield-alt" style="font-size: 2rem; color: #f59e0b; margin-bottom: 1rem;"></i>
+                                        <h4 style="color: #1a202c; margin-bottom: 1rem;">Enterprise Security</h4>
+                                        <p style="color: #4a5568; line-height: 1.6;">Backup automatico e gestione errori robusta</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Results & Impact -->
+                            <div style="background: white; border-radius: 20px; padding: 3rem; margin-bottom: 3rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+                                <h2 style="text-align: center; margin-bottom: 3rem; color: #1a202c;">📈 Risultati & Impatto</h2>
+                                
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: center; margin-bottom: 3rem;">
+                                    <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 2rem; border-radius: 15px;">
+                                        <div style="font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem;">90%</div>
+                                        <div style="opacity: 0.9; font-weight: 600;">Riduzione Tempi</div>
+                                        <small style="opacity: 0.8;">di Elaborazione Ordini</small>
+                                    </div>
+                                    <div style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 2rem; border-radius: 15px;">
+                                        <div style="font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem;">100%</div>
+                                        <div style="opacity: 0.9; font-weight: 600;">Automazione</div>
+                                        <small style="opacity: 0.8;">Calcoli e Report</small>
+                                    </div>
+                                    <div style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 2rem; border-radius: 15px;">
+                                        <div style="font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem;">0%</div>
+                                        <div style="opacity: 0.9; font-weight: 600;">Errori Manuali</div>
+                                        <small style="opacity: 0.8;">Sistema Validazione</small>
+                                    </div>
+                                    <div style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; padding: 2rem; border-radius: 15px;">
+                                        <div style="font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem;">24/7</div>
+                                        <div style="opacity: 0.9; font-weight: 600;">Disponibilità</div>
+                                        <small style="opacity: 0.8;">Cloud Access</small>
+                                    </div>
+                                </div>
+
+                                <div style="background: #f8fafc; padding: 2rem; border-radius: 15px;">
+                                    <h3 style="color: #1a202c; margin-bottom: 1rem; text-align: center;">💡 Competenze Dimostrate</h3>
+                                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                                        <div>
+                                            <h4 style="color: #667eea; margin-bottom: 0.5rem;">🎯 Problem Solving</h4>
+                                            <p style="color: #4a5568; font-size: 0.95rem;">Analisi requisiti aziendali e progettazione soluzioni scalabili</p>
+                                        </div>
+                                        <div>
+                                            <h4 style="color: #10b981; margin-bottom: 0.5rem;">⚡ Full-Stack Development</h4>
+                                            <p style="color: #4a5568; font-size: 0.95rem;">Sviluppo completo frontend, backend e database</p>
+                                        </div>
+                                        <div>
+                                            <h4 style="color: #f59e0b; margin-bottom: 0.5rem;">☁️ Cloud Architecture</h4>
+                                            <p style="color: #4a5568; font-size: 0.95rem;">Implementazione sistemi distribuiti e real-time</p>
+                                        </div>
+                                        <div>
+                                            <h4 style="color: #8b5cf6; margin-bottom: 0.5rem;">🔧 System Integration</h4>
+                                            <p style="color: #4a5568; font-size: 0.95rem;">Integrazione multi-piattaforma e API design</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- CTA Section -->
+                            <div style="background: white; border-radius: 20px; padding: 3rem; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+                                <h2 style="margin-bottom: 1rem; color: #1a202c;">🚀 Pronto per Nuove Sfide</h2>
+                                <p style="font-size: 1.1rem; color: #4a5568; max-width: 600px; margin: 0 auto 2rem;">
+                                    Questo progetto dimostra la mia capacità di sviluppare soluzioni enterprise complete, 
+                                    dalla progettazione all'implementazione, con focus su qualità, scalabilità e user experience.
+                                </p>
+                                
+                                <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
+                                    <a href="mailto:alexp.magliarella@gmail.com" style="display: flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; border-radius: 15px; transition: all 0.3s ease;">
+                                        <i class="fas fa-envelope"></i>
+                                        Contattami
+                                    </a>
+                                    <button onclick="goToNeriProject()" style="display: flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 15px; cursor: pointer; transition: all 0.3s ease;">
+                                        <i class="fas fa-code"></i>
+                                        Vedi Sistema Tecnico
+                                    </button>
+                                </div>
+
+                                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0;">
+                                    <p style="color: #6b7280;">
+                                        <strong>Alex Pio Magliarella</strong> • Computer Science Student • Full-Stack Developer
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Navigation to Neri Project
+        function goToNeriProject() {
+            // Hide all sections
+            document.querySelectorAll('section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Hide navbar
+            document.querySelector('.navbar').style.display = 'none';
+            
+            // Create and show Neri project page
+            const neriPage = document.createElement('div');
+            neriPage.id = 'neri-project-page';
+            neriPage.innerHTML = getNeriProjectPage();
+            document.body.appendChild(neriPage);
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function backToPortfolio() {
+            // Remove Neri project page
+            const neriPage = document.getElementById('neri-project-page');
+            if (neriPage) {
+                neriPage.remove();
+            }
+            
+            // Show all sections
+            document.querySelectorAll('section').forEach(section => {
+                section.style.display = 'block';
+            });
+            
+            // Show navbar
+            document.querySelector('.navbar').style.display = 'block';
+            
+            // Scroll to projects section
+            document.getElementById('projects').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Get Neri Project Full Page Content
+        function getNeriProjectPage() {
+            return `
+                <div style="min-height: 100vh; background: white;">
+                    <!-- Header with back button -->
+                    <div style="position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); z-index: 1000; padding: 1rem 0; box-shadow: 0 2px 20px rgba(0,0,0,0.1);">
+                        <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; padding: 0 2rem;">
+                            <button onclick="backToPortfolio()" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-arrow-left"></i>
+                                Torna al Portfolio
+                            </button>
+                            <h1 style="margin-left: 2rem; color: #1a202c; font-size: 1.5rem; font-weight: 700;">🍽️ Neri Catering System</h1>
+                        </div>
+                    </div>
+
+                    <!-- Main content -->
+                    <div style="padding-top: 6rem;">
+                        <!-- Hero Section -->
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 4rem 2rem; text-align: center;">
+                            <div style="max-width: 1200px; margin: 0 auto;">
+<h1 style="font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; color: white;">🍽️ Neri Catering System</h1>                                <p style="font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.9;">Sistema completo per la gestione ordini catering con architettura cloud-native</p>
+                                
+                                <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem;">
+                                    <span style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); padding: 0.5rem 1rem; border-radius: 25px; font-weight: 600; backdrop-filter: blur(10px);">Python</span>
+                                    <span style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); padding: 0.5rem 1rem; border-radius: 25px; font-weight: 600; backdrop-filter: blur(10px);">PyQt6</span>
+                                    <span style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); padding: 0.5rem 1rem; border-radius: 25px; font-weight: 600; backdrop-filter: blur(10px);">Firebase</span>
+                                    <span style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); padding: 0.5rem 1rem; border-radius: 25px; font-weight: 600; backdrop-filter: blur(10px);">Flask</span>
+                                    <span style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); padding: 0.5rem 1rem; border-radius: 25px; font-weight: 600; backdrop-filter: blur(10px);">JavaScript</span>
+                                    <span style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); padding: 0.5rem 1rem; border-radius: 25px; font-weight: 600; backdrop-filter: blur(10px);">Real-time</span>
+                                </div>
+
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+                                    <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 15px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                                        <div style="font-size: 2rem; font-weight: 800; color: #ffd89b; margin-bottom: 0.5rem;">3</div>
+                                        <div style="color: white; opacity: 0.9; font-weight: 600;">Moduli Principali</div>
+                                    </div>
+                                    <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 15px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                                        <div style="font-size: 2rem; font-weight: 800; color: #ffd89b; margin-bottom: 0.5rem;">2000+</div>
+                                        <div style="color: white; opacity: 0.9; font-weight: 600;">Righe di Codice</div>
+                                    </div>
+                                    <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 15px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                                        <div style="font-size: 2rem; font-weight: 800; color: #ffd89b; margin-bottom: 0.5rem;">5</div>
+                                        <div style="color: white; opacity: 0.9; font-weight: 600;">Tecnologie Integrate</div>
+                                    </div>
+                                    <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 15px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                                        <div style="font-size: 2rem; font-weight: 800; color: #ffd89b; margin-bottom: 0.5rem;">100%</div>
+                                        <div style="color: white; opacity: 0.9; font-weight: 600;">Funzionale</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Grid -->
+                        <div style="max-width: 1200px; margin: 0 auto; padding: 4rem 2rem;">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+                                <div style="background: white; border-radius: 20px; padding: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1); position: relative; overflow: hidden;">
+                                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #8b5cf6, #06b6d4, #10b981);"></div>
+                                    <div style="width: 60px; height: 60px; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; margin-bottom: 1.5rem; background: linear-gradient(135deg, #8b5cf6, #06b6d4);">
+                                        <i class="fas fa-desktop"></i>
+                                    </div>
+                                    <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem; color: #1a202c;">📋 Applicazione Desktop</h3>
+                                    <p style="color: #4a5568; margin-bottom: 1.5rem; line-height: 1.6;">Interfaccia PyQt6 moderna per la gestione completa degli ordini catering con design intuitivo e funzionalità avanzate.</p>
+                                    <ul style="list-style: none; margin-bottom: 1.5rem;">
+                                        <li style="padding: 0.5rem 0; color: #2d3748; position: relative; padding-left: 1.5rem;"><span style="position: absolute; left: 0; color: #10b981; font-weight: bold;">✓</span>GUI moderna con design cards</li>
+                                        <li style="padding: 0.5rem 0; color: #2d3748; position: relative; padding-left: 1.5rem;"><span style="position: absolute; left: 0; color: #10b981; font-weight: bold;">✓</span>Gestione ordini completa</li>
+                                        <li style="padding: 0.5rem 0; color: #2d3748; position: relative; padding-left: 1.5rem;"><span style="position: absolute; left: 0; color: #10b981; font-weight: bold;">✓</span>Calcolo automatico prezzi</li>
+                                        <li style="padding: 0.5rem 0; color: #2d3748; position: relative; padding-left: 1.5rem;"><span style="position: absolute; left: 0; color: #10b981; font-weight: bold;">✓</span>Export Excel e Word</li>
+                                        <li style="padding: 0.5rem 0; color: #2d3748; position: relative; padding-left: 1.5rem;"><span style="position: absolute; left: 0; color: #10b981; font-weight: bold;">✓</span>Sistema di backup automatico</li>
+                                        <li style="padding: 0.5rem 0; color: #2d3748; position: relative; padding-left: 1.5rem;"><span style="position: absolute; left: 0; color: #10b981; font-weight: bold;">✓</span>Ricerca avanzata referenze</li>
+                                    </ul>
+                                </div>
+
+                                <div style="background: white; border-radius: 20px; padding: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1); position: relative; overflow: hidden;">
+                                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #8b5cf6, #06b6d4, #10b981);"></div>
+                                    <div style="width: 60px; height: 60px; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; margin-bottom: 1.5rem; background: linear-gradient(135deg, #10b981, #f59e0b);">
+                                        <i class="fas fa-cloud"></i>
+                                    </div>
+                                    <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem; color: #1a202c;">☁️ Server Cloud Centrale</h3>
+                                    <p style="color: #4a5568; margin-bottom: 1.5rem; line-height: 1.6;">Sistema di sincronizzazione cloud con Flask e Firebase per accesso multi-dispositivo in tempo reale.</p>
+                                    <ul style="list-style: none; margin-bottom: 1.5rem;">
+                                        <li style="padding: 0.5rem 0; color: #2d3748; position: relative; padding-left: 1.5rem;"><span style="position: absolute; left: 0; color: #10b981; font-weight: bold;">✓</span>API RESTful complete</li>
+                                        <li style="padding: 0.5rem 0; color: #2d3748; position: relative; padding-left: 1.5rem;"><span style="position: absolute; left: 0; color: #10b981; font-weight: bold;">✓</span>Sincronizzazione Firebase</li>
+                                        <li style="padding: 0.5rem 0; color: #2d3748; position: relative; padding-left: 1.5rem;"><span style="position: absolute; left: 0; color: #10b981; font-weight: bold;">✓</span>Aggregazione dati automatica</li>
+                                        <li style="padding: 0.5rem 0; color: #2d3748; position: relative; padding-left: 1.5rem;"><span style="position: absolute; left: 0; color: #10b981; font-weight: bold;">✓</span>Multi-client support</li>
+                                        <li style="padding: 0.5rem 0; color: #2d3748; position: relative; padding-left: 1.5rem;"><span style="position: absolute; left: 0; color: #10b981; font-weight: bold;">✓</span>Gestione stato persistence</li>
+                                        <li style="padding: 0.5rem 0; color: #2d3748; position: relative; padding-left: 1.5rem;"><span style="position: absolute; left: 0; color: #10b981; font-weight: bold;">✓</span>Error handling robusto</li>
+                                    </ul>
+                                </div>
+
+                                <div style="background: white; border-radius: 20px; padding: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1); position: relative; overflow: hidden;">
+                                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #8b5cf6, #06b6d4, #10b981);"></div>
+                                    <div style="width: 60px; height: 60px; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; margin-bottom: 1.5rem; background: linear-gradient(135deg, #f59e0b, #ef4444);">
+                                        <i class="fas fa-utensils"></i>
+                                    </div>
+                                    <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem; color: #1a202c;">👨‍🍳 Monitor Cucina Web</h3>
+                                    <p style="color: #4a5568; margin-bottom: 1.5rem; line-height: 1.6;">Interfaccia web responsive per il monitoraggio real-time degli ordini in cucina con aggiornamenti automatici.</p>
+                                    <ul style="list-style: none; margin-bottom: 1.5rem;">
+                                        <li style="padding: 0.5rem 0; color: #2d3748; position: relative; padding-left: 1.5rem;"><span style="position: absolute; left: 0; color: #10b981; font-weight: bold;">✓</span>Real-time updates (15s)</li>
+                                        <li style="padding: 0.5rem 0; color: #2d3748; position: relative; padding-left: 1.5rem;"><span style="position: absolute; left: 0; color: #10b981; font-weight: bold;">✓</span>Filtri avanzati ordini</li>
+                                        <li style="padding: 0.5rem 0; color: #2d3748; position: relative; padding-left: 1.5rem;"><span style="position: absolute; left: 0; color: #10b981; font-weight: bold;">✓</span>Modalità selezione multipla</li>
+                                        <li style="padding: 0.5rem 0; color: #2d3748; position: relative; padding-left: 1.5rem;"><span style="position: absolute; left: 0; color: #10b981; font-weight: bold;">✓</span>Calcolo totali aggregati</li>
+                                        <li style="padding: 0.5rem 0; color: #2d3748; position: relative; padding-left: 1.5rem;"><span style="position: absolute; left: 0; color: #10b981; font-weight: bold;">✓</span>Gestione intolleranze</li>
+                                        <li style="padding: 0.5rem 0; color: #2d3748; position: relative; padding-left: 1.5rem;"><span style="position: absolute; left: 0; color: #10b981; font-weight: bold;">✓</span>Design responsive mobile</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Architecture Section -->
+                            <div style="background: white; border-radius: 20px; padding: 3rem; margin-bottom: 3rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+                                <h2 style="text-align: center; margin-bottom: 2rem; color: #1a202c;">🏗️ Architettura del Sistema</h2>
+                                
+                                <div style="display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap; margin: 2rem 0;">
+                                    <div style="background: linear-gradient(135deg, #8b5cf6, #06b6d4); color: white; padding: 1rem 1.5rem; border-radius: 15px; text-align: center; font-weight: 600; min-width: 150px;">
+                                        <i class="fas fa-desktop"></i><br>
+                                        Desktop App<br>
+                                        <small>PyQt6 + JSON</small>
+                                    </div>
+                                    <div style="font-size: 1.5rem; color: #667eea;">→</div>
+                                    <div style="background: linear-gradient(135deg, #8b5cf6, #06b6d4); color: white; padding: 1rem 1.5rem; border-radius: 15px; text-align: center; font-weight: 600; min-width: 150px;">
+                                        <i class="fas fa-server"></i><br>
+                                        Flask Server<br>
+                                        <small>REST API</small>
+                                    </div>
+                                    <div style="font-size: 1.5rem; color: #667eea;">→</div>
+                                    <div style="background: linear-gradient(135deg, #8b5cf6, #06b6d4); color: white; padding: 1rem 1.5rem; border-radius: 15px; text-align: center; font-weight: 600; min-width: 150px;">
+                                        <i class="fas fa-cloud"></i><br>
+                                        Firebase<br>
+                                        <small>Cloud Database</small>
+                                    </div>
+                                    <div style="font-size: 1.5rem; color: #667eea;">→</div>
+                                    <div style="background: linear-gradient(135deg, #8b5cf6, #06b6d4); color: white; padding: 1rem 1.5rem; border-radius: 15px; text-align: center; font-weight: 600; min-width: 150px;">
+                                        <i class="fas fa-globe"></i><br>
+                                        Web Monitor<br>
+                                        <small>Real-time UI</small>
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 3rem;">
+                                    <h3 style="color: #1a202c; margin-bottom: 1rem;">🔧 Caratteristiche Tecniche Avanzate</h3>
+                                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 1rem;">
+                                        <div>
+                                            <h4 style="color: #8b5cf6; margin-bottom: 0.5rem;">🎯 Frontend</h4>
+                                            <p>PyQt6 con design moderno, gestione scroll ottimizzata, sistema di ricerca real-time e shortcuts keyboard avanzati.</p>
+                                        </div>
+                                        <div>
+                                            <h4 style="color: #06b6d4; margin-bottom: 0.5rem;">⚡ Backend</h4>
+                                            <p>Flask server con routing dinamico, gestione errori robusta, logging avanzato e sistema di cache intelligente.</p>
+                                        </div>
+                                        <div>
+                                            <h4 style="color: #10b981; margin-bottom: 0.5rem;">☁️ Cloud</h4>
+                                            <p>Firebase Firestore per persistenza, sync bi-direzionale, gestione offline e real-time listeners.</p>
+                                        </div>
+                                        <div>
+                                            <h4 style="color: #f59e0b; margin-bottom: 0.5rem;">📱 Web UI</h4>
+                                            <p>JavaScript moderno, DOM manipulation ottimizzata, responsive design e PWA features.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Features Section -->
+                            <div style="background: white; border-radius: 20px; padding: 3rem; margin-bottom: 3rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+                                <h2 style="text-align: center; margin-bottom: 2rem; color: #1a202c;">🚀 Funzionalità Implementate</h2>
+                                
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                                    <div style="text-align: center; padding: 1.5rem; background: #f8fafc; border-radius: 15px;">
+                                        <i class="fas fa-plus-circle" style="font-size: 2rem; color: #10b981; margin-bottom: 1rem;"></i>
+                                        <h4>Gestione Ordini</h4>
+                                        <p>Creazione, modifica, duplicazione ordini con validazione automatica campi</p>
+                                    </div>
+                                    <div style="text-align: center; padding: 1.5rem; background: #f8fafc; border-radius: 15px;">
+                                        <i class="fas fa-calculator" style="font-size: 2rem; color: #8b5cf6; margin-bottom: 1rem;"></i>
+                                        <h4>Calcoli Automatici</h4>
+                                        <p>Prezzi, quantità e totali con sistema di referenze dinamico</p>
+                                    </div>
+                                    <div style="text-align: center; padding: 1.5rem; background: #f8fafc; border-radius: 15px;">
+                                        <i class="fas fa-file-export" style="font-size: 2rem; color: #06b6d4; margin-bottom: 1rem;"></i>
+                                        <h4>Export Avanzato</h4>
+                                        <p>Generazione automatica Excel e Word con formattazione professionale</p>
+                                    </div>
+                                    <div style="text-align: center; padding: 1.5rem; background: #f8fafc; border-radius: 15px;">
+                                        <i class="fas fa-sync-alt" style="font-size: 2rem; color: #f59e0b; margin-bottom: 1rem;"></i>
+                                        <h4>Sync Real-time</h4>
+                                        <p>Sincronizzazione automatica cross-platform con conflict resolution</p>
+                                    </div>
+                                    <div style="text-align: center; padding: 1.5rem; background: #f8fafc; border-radius: 15px;">
+                                        <i class="fas fa-chart-bar" style="font-size: 2rem; color: #ef4444; margin-bottom: 1rem;"></i>
+                                        <h4>Analytics</h4>
+                                        <p>Statistiche avanzate, filtri temporali e report automatici</p>
+                                    </div>
+                                    <div style="text-align: center; padding: 1.5rem; background: #f8fafc; border-radius: 15px;">
+                                        <i class="fas fa-mobile-alt" style="font-size: 2rem; color: #10b981; margin-bottom: 1rem;"></i>
+                                        <h4>Multi-Platform</h4>
+                                        <p>Desktop, web e mobile-responsive con UX ottimizzata</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Contact Section -->
+                            <div style="background: white; border-radius: 20px; padding: 3rem; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+                                <h2 style="margin-bottom: 1rem; color: #1a202c;">💼 Progetto Portfolio</h2>
+                                <p style="font-size: 1.1rem; color: #4a5568; max-width: 600px; margin: 0 auto 2rem;">
+                                    Sistema completo sviluppato end-to-end, dalla progettazione all'implementazione, 
+                                    dimostrando competenze full-stack e capacità di problem-solving in contesti aziendali reali.
+                                </p>
+                                
+                                <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; flex-wrap: wrap;">
+                                    <a href="mailto:alexp.magliarella@gmail.com" style="display: flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; border-radius: 15px; transition: all 0.3s ease;">
+                                        <i class="fas fa-envelope"></i>
+                                        Email
+                                    </a>
+                                </div>
+
+                                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0;">
+                                    <p style="color: #6b7280;">
+                                        <strong>Alex Pio Magliarella</strong> • Computer Science Student • Full-Stack Developer
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
